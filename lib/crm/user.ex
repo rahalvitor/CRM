@@ -2,7 +2,7 @@ defmodule CRM.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @fields [:id, :email, :cpf, :birthday]
+  @fields [:id, :name, :email, :cpf, :birthday]
   @primary_key {:id, :binary_id, autogenerate: true }
 
   schema "users" do
