@@ -6,9 +6,8 @@ defmodule Crm.User do
   @required_fields [:name, :cpf]
   @optional_fields [:uid, :email, :birthday, :last_name]
 
-
+  @primary_key {:uid, :binary_id, autogenerate: true}
   schema "users" do
-    field :uid, Ecto.UUID, autogenerate: true
     field :name, :string
     field :last_name, :string
     field :email, :string

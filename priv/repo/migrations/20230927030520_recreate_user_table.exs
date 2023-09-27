@@ -2,11 +2,13 @@ defmodule Crm.Repo.Migrations.RecreateUserTable do
   use Ecto.Migration
 
 
-  def change do
+  def up do
     drop table("users")
+  end
 
-    create table(:users) do
-      add :uid, :uuid, required: true
+  def down do
+    create table(:users, primary_key: false) do
+      add :uid, :uuid, required: true, primary_key: true
       add :cpf, :string, required: true
       add :birthday, :date
       add :name, :string, required: true
