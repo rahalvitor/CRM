@@ -1,11 +1,14 @@
-defmodule CRM.User do
+defmodule Crm.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @fields [:id, :name, :email, :cpf, :birthday, :last_name]
-  @primary_key {:id, :binary_id, autogenerate: true }
+
+  @required_fields [:name, :cpf]
+  @optional_fields [:uid, :email, :birthday, :last_name]
+
 
   schema "users" do
+    field :uid, Ecto.UUID, autogenerate: true
     field :name, :string
     field :last_name, :string
     field :email, :string
@@ -16,7 +19,9 @@ defmodule CRM.User do
 
   def changeset(params) do
     %__MODULE__{}
-    |>cast(params,  @fields)
-
+    |>cast(params, @required_fields ++ @optional_fields)
+    |>validate_required(@required_fields)
+    |>unique_constraint(:uid)
+    |>unique_constraint(:cpf)
   end
 end
