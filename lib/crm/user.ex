@@ -4,13 +4,12 @@ defmodule Crm.User do
 
 
   @required_fields [:name, :cpf]
-  @optional_fields [:uid, :email, :birthday, :last_name]
+  @optional_fields [:uid, :birthday, :last_name]
 
   @primary_key {:uid, :binary_id, autogenerate: true}
   schema "users" do
     field :name, :string
     field :last_name, :string
-    field :email, :string
     field :cpf, :string
     field :birthday, :date
     timestamps()
@@ -21,6 +20,6 @@ defmodule Crm.User do
     |>cast(params, @required_fields ++ @optional_fields)
     |>validate_required(@required_fields)
     |>unique_constraint(:uid)
-    |>unique_constraint(:cpf)
+    |>unique_constraint(:cpf, message: "CPF Must be unique")
   end
 end
