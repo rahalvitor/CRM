@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :crm, Crm.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "gist_pwd",
   hostname: "localhost",
   database: "crm_dev",
   stacktrace: true,
